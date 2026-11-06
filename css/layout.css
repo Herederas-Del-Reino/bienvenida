@@ -1,0 +1,61 @@
+/* Estructura: barra, progreso, secciones del recorrido */
+.contenedor { width: min(100% - 2 * var(--gutter), var(--ancho)); margin-inline: auto; }
+.lectura { width: min(100% - 2 * var(--gutter), var(--lectura)); margin-inline: auto; }
+
+.momento {
+  position: relative; isolation: isolate;
+  padding: clamp(64px, 11vw, 120px) 0;
+  scroll-margin-top: var(--barra);
+}
+.momento__cabecera { text-align: center; max-width: 640px; margin: 0 auto clamp(28px, 5vw, 48px); }
+.momento__numero { display: block; font: italic 500 1rem/1 var(--f-editorial); color: var(--dorado-oscuro); margin-bottom: 10px; letter-spacing: .08em; }
+.momento__cabecera h2 { font-size: clamp(2rem, 7vw, 3.2rem); margin-top: 12px; }
+.momento__cabecera h2 em { font-weight: 500; color: var(--vino-suave); }
+.momento__cabecera p { margin-top: 14px; color: var(--marron); }
+.momento__pie { display: flex; justify-content: center; margin-top: clamp(32px, 6vw, 56px); }
+
+/* Transición narrativa entre momentos: un filete con ornamento */
+.momento + .momento::before {
+  content: ""; position: absolute; top: 0; left: 50%; width: 120px; height: 1px; transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+}
+
+/* Barra superior compacta */
+.barra {
+  position: fixed; inset: 0 0 auto; z-index: 100; height: var(--barra);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 0 var(--gutter);
+  background: rgba(255, 246, 239, .82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--linea);
+  transform: translateY(-100%); transition: transform .6s var(--suave);
+}
+.barra.visible { transform: none; }
+.barra__marca { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--vino); min-width: 0; }
+.barra__marca img { width: 34px; border-radius: 8px; }
+.barra__marca span { font: 600 .95rem/1 var(--f-editorial); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+.barra__actual { font: italic 500 1rem/1 var(--f-editorial); color: var(--marron); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.progreso { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: transparent; }
+.progreso span { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--rosa-antiguo), var(--dorado)); transform-origin: 0 50%; transform: scaleX(0); }
+
+/* Índice del recorrido (menú) */
+.indice { border: 0; padding: 0; margin: 0; max-width: none; max-height: none; width: 100%; height: 100%; background: transparent; }
+.indice::backdrop { background: rgba(74, 51, 43, .35); backdrop-filter: blur(3px); }
+.indice__panel {
+  position: absolute; top: 0; right: 0; width: min(380px, 100%); height: 100%; overflow-y: auto;
+  background: var(--papel); padding: 24px 24px 32px; box-shadow: -20px 0 60px -30px rgba(74,51,43,.5);
+}
+.indice[open] .indice__panel { animation: deslizar .5s var(--suave); }
+@keyframes deslizar { from { transform: translateX(30px); opacity: 0; } }
+.indice h2 { font-size: 1.6rem; margin: 18px 0 18px; }
+.indice ol { list-style: none; padding: 0; margin: 0; counter-reset: paso; }
+.indice li { counter-increment: paso; }
+.indice a {
+  display: flex; align-items: baseline; gap: 14px; padding: 13px 8px; text-decoration: none; color: var(--marron-oscuro);
+  border-bottom: 1px solid var(--linea); border-radius: 0;
+}
+.indice a::before { content: counter(paso, decimal-leading-zero); font: italic 500 .95rem/1 var(--f-editorial); color: var(--dorado-oscuro); min-width: 24px; }
+.indice a[aria-current="true"] { color: var(--vino); font-weight: 500; }
+.indice a:hover { background: rgba(244, 214, 222, .4); }
+
+/* Puntos de navegación lateral (pantallas grandes) */
+.puntos { display: none; }

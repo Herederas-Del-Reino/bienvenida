@@ -1,0 +1,42 @@
+/* Tokens de diseño — Herederas del Reino */
+:root {
+  /* Paleta oficial */
+  --marfil: #FFF6EF;
+  --rosa-empolvado: #F4D6DE;
+  --rosa-antiguo: #E8B4C2;
+  --durazno: #F3C7B5;
+  --dorado: #D4AF37;
+  --beige: #E7DCC6;
+  --marron: #6B4B3E;
+
+  /* Variaciones de luminosidad (sombras y profundidad) */
+  --marron-oscuro: #4A332B;
+  --marron-suave: #8A6B5E;
+  --vino: #7A3346;              /* tono de los títulos de los afiches oficiales */
+  --vino-suave: #9C5466;
+  --dorado-oscuro: #9E7E1E;
+  --papel: #FFFBF7;
+  --linea: rgba(107, 75, 62, .14);
+  --linea-dorada: rgba(212, 175, 55, .45);
+
+  /* Tipografía */
+  --f-titulo: 'Playfair Display', Georgia, serif;
+  --f-editorial: 'Cormorant Garamond', Georgia, serif;
+  --f-texto: 'DM Sans', system-ui, sans-serif;
+
+  /* Escala */
+  --radio: 18px;
+  --radio-l: 28px;
+  --sombra: 0 22px 50px -28px rgba(74, 51, 43, .45);
+  --sombra-suave: 0 10px 28px -18px rgba(74, 51, 43, .35);
+  --ancho: 1120px;
+  --lectura: 680px;
+  --gutter: clamp(16px, 5vw, 40px);
+  --barra: 60px;
+
+  /* Movimiento */
+  --suave: cubic-bezier(.22, .7, .2, 1);
+  --t-corta: 300ms;
+  --t-media: 700ms;
+  --t-larga: 1200ms;
+}
