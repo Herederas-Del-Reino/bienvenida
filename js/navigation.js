@@ -50,7 +50,7 @@ export function iniciarNavegacion() {
     const p = max > 0 ? Math.min(1, scrollY / max) : 0;
     progreso.firstElementChild.style.transform = `scaleX(${p})`;
     progreso.setAttribute('aria-valuenow', Math.round(p * 100));
-    barra.classList.toggle('visible', scrollY > innerHeight * 0.55);
+    barra.classList.toggle('solida', scrollY > 24);
   };
   addEventListener('scroll', () => { if (!pendiente) { pendiente = true; requestAnimationFrame(actualizar); } }, { passive: true });
   addEventListener('resize', actualizar, { passive: true });

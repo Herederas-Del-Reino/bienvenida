@@ -52,7 +52,7 @@ function filete(ctx, y, ancho = 220) {
 export async function generarTarjeta({ titulo, texto, referencia, cierre = [] }) {
   await fuentesListas();
   const [logo, mariposa, flor1, flor2] = await Promise.all([
-    cargarImagen('assets/images/logo-vino.webp'), cargarImagen('assets/images/mariposa-1.webp'),
+    cargarImagen('assets/images/logo-oficial.webp'), cargarImagen('assets/images/mariposa-1.webp'),
     cargarImagen('assets/images/peonia-1.webp'), cargarImagen('assets/images/anemona.webp'),
   ]);
   const c = document.createElement('canvas'); c.width = ANCHO; c.height = ALTO;
@@ -60,7 +60,7 @@ export async function generarTarjeta({ titulo, texto, referencia, cierre = [] })
 
   // Fondo marfil con luz cálida
   const g = ctx.createRadialGradient(ANCHO * 0.5, ALTO * 0.15, 80, ANCHO * 0.5, ALTO * 0.5, ALTO * 0.85);
-  g.addColorStop(0, '#FFFDF9'); g.addColorStop(0.6, COLORES.marfil); g.addColorStop(1, '#F6E3E2');
+  g.addColorStop(0, '#FFFDF9'); g.addColorStop(0.55, '#FCEFEA'); g.addColorStop(1, COLORES.rosa);
   ctx.fillStyle = g; ctx.fillRect(0, 0, ANCHO, ALTO);
 
   // Doble marco dorado fino
@@ -75,7 +75,7 @@ export async function generarTarjeta({ titulo, texto, referencia, cierre = [] })
   ctx.drawImage(mariposa, ANCHO - 230, 110, 120, 120 * mariposa.height / mariposa.width);
 
   // Logotipo oficial
-  const lw = 400, lh = lw * logo.height / logo.width;
+  const lw = 360, lh = lw * logo.height / logo.width;
   ctx.drawImage(logo, (ANCHO - lw) / 2, 120, lw, lh);
   let y = 120 + lh + 56;
   filete(ctx, y); y += 92;

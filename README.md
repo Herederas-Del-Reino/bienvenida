@@ -33,7 +33,7 @@ Portal de bienvenida de **Herederas del Reino**: un recorrido espiritual guiado 
 | Textos bíblicos, verdades de identidad, promesas | `data/verses.js` |
 | Lecciones del estudio bíblico | `data/lessons.js` |
 | Textos fijos (carta, oración, títulos) | `index.html` |
-| Colores y tipografías | `css/variables.css` |
+| Colores, tipografías y espaciado | `css/variables.css` |
 
 ### Mensaje y foto de la pastora
 En `data/config.js` → `pastora.mensaje`, escribe el mensaje **aprobado por ella**. Para una foto oficial, guárdala en `assets/images/` (formato `.webp`, mínimo 400 × 400 px) y cambia `pastora.foto`.
@@ -91,4 +91,4 @@ Si necesitas configurarlo de nuevo: *Settings → Pages → Build and deployment
 
 ## Créditos de imágenes
 
-Logotipo, fotografías del ministerio, flores y mariposas: recursos oficiales de Herederas del Reino. Imágenes de la puerta, el sobre, las Biblias y la ventana: proporcionadas por el ministerio y ajustadas a su paleta. Fuentes: Playfair Display, Cormorant Garamond y DM Sans (SIL Open Font License).
+Logotipo (`logo-oficial.webp`, tomado sin alteraciones del encabezado del sitio principal), fotografías del ministerio, flores y mariposas: recursos oficiales de Herederas del Reino. Imágenes de la puerta, el sobre, las Biblias, la ventana, el fondo de rosas y el arco floral: proporcionadas por el ministerio. Fuentes: Playfair Display, Cormorant Garamond y DM Sans (SIL Open Font License).

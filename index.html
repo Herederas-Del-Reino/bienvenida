@@ -20,13 +20,13 @@
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="preload" href="assets/images/puerta.webp" as="image">
 <link rel="preload" href="assets/fonts/playfair-display.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/animations.css">
-<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/fonts.css?v=3">
+<link rel="stylesheet" href="css/variables.css?v=3">
+<link rel="stylesheet" href="css/base.css?v=3">
+<link rel="stylesheet" href="css/layout.css?v=3">
+<link rel="stylesheet" href="css/components.css?v=3">
+<link rel="stylesheet" href="css/animations.css?v=3">
+<link rel="stylesheet" href="css/responsive.css?v=3">
 </head>
 <body>
 <a class="saltar" href="#carta">Saltar al recorrido</a>
@@ -49,10 +49,10 @@
 
 <!-- Barra compacta con progreso del recorrido -->
 <header class="barra" id="barra">
-  <a class="barra__marca" href="#puerta" aria-label="Volver al inicio del recorrido">
-    <img src="assets/images/hr-insignia.webp" alt="" width="34" height="31">
-    <span class="barra__actual" id="barra-actual" aria-live="polite">Bienvenida</span>
+  <a class="barra__marca" href="#puerta" aria-label="Herederas del Reino · volver al inicio del recorrido">
+    <img class="barra__logo" src="assets/images/logo-oficial.webp" alt="Herederas del Reino" width="516" height="274">
   </a>
+  <span class="barra__actual" id="barra-actual" aria-live="polite">Bienvenida</span>
   <button class="icono-boton" type="button" id="abrir-indice" aria-haspopup="dialog" aria-controls="indice" aria-label="Ver los momentos del recorrido"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
   <div class="progreso" role="progressbar" aria-label="Progreso del recorrido" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progreso"><span></span></div>
 </header>
@@ -70,12 +70,15 @@
 
 <!-- ===================== 01 · LA PUERTA DE BIENVENIDA ===================== -->
 <section class="momento puerta" id="puerta" data-nombre="La puerta de bienvenida" aria-labelledby="titulo-puerta">
-  <div class="mariposas" data-mariposas="3" aria-hidden="true"></div>
+  <div class="mariposas" data-mariposas="4" aria-hidden="true"></div>
   <div class="contenedor puerta__grid">
-    <img class="puerta__logo aparecer" src="assets/images/logo-vino.webp" alt="Herederas del Reino" width="382" height="167">
-    <figure class="puerta__marco aparecer" data-retraso="1" style="margin:0">
-      <img class="puerta__img" src="assets/images/puerta.webp" alt="Una puerta arqueada, iluminada por luz cálida, entre flores" width="846" height="614" fetchpriority="high">
-      <span class="puerta__luz" aria-hidden="true"></span>
+    <figure class="puerta__marco aparecer" data-retraso="1">
+      <div class="puerta__ventana">
+        <img class="puerta__img" src="assets/images/puerta.webp" alt="Una puerta arqueada, iluminada por luz cálida, entre flores" width="846" height="614" fetchpriority="high">
+        <span class="puerta__luz" aria-hidden="true"></span>
+      </div>
+      <img class="puerta__flor puerta__flor--izq" src="assets/images/peonia-1.webp" alt="" aria-hidden="true">
+      <img class="puerta__flor puerta__flor--der" src="assets/images/anemona.webp" alt="" aria-hidden="true">
     </figure>
     <div class="puerta__texto">
       <h1 id="titulo-puerta" class="aparecer" data-retraso="1">Bienvenida a casa, <em>Heredera.</em></h1>
@@ -86,7 +89,7 @@
       </div>
       <blockquote class="puerta__versiculo aparecer" data-retraso="3" data-versiculo="Romanos 15:7"></blockquote>
       <div class="botones aparecer" data-retraso="3">
-        <button class="boton" type="button" id="comenzar">Comenzar mi recorrido <svg aria-hidden="true"><use href="#i-flecha"/></svg></button>
+        <button class="boton boton--protagonista" type="button" id="comenzar">Comenzar mi recorrido <svg aria-hidden="true"><use href="#i-flecha"/></svg></button>
       </div>
     </div>
   </div>
@@ -103,6 +106,7 @@
       <p>Toca el sobre para abrir tu carta.</p>
     </header>
     <div class="carta-contenedor" style="position:relative">
+      <img class="flor-deco flor-deco--carta" src="assets/images/peonia-2.webp" alt="" aria-hidden="true" loading="lazy">
       <button class="sobre aparecer" type="button" id="sobre" aria-expanded="false" aria-controls="carta-papel">
         <img src="assets/images/sobre.webp" alt="Sobre rosa empolvado cerrado con un sello de cera dorado" width="636" height="595" loading="lazy">
         <span class="sobre__brillo" aria-hidden="true"></span>
@@ -132,14 +136,16 @@
 <!-- ===================== 03 · IDENTIDAD EN CRISTO ===================== -->
 <section class="momento identidad" id="identidad" data-nombre="¿Quién soy en Cristo?" aria-labelledby="titulo-identidad">
   <div class="contenedor">
-    <header class="momento__cabecera aparecer">
-      <span class="momento__numero">03</span>
-      <span class="etiqueta">Descubre tu identidad en Cristo</span>
-      <h2 id="titulo-identidad">¿Quién soy <em>en Cristo?</em></h2>
-    </header>
-    <div class="identidad__intro aparecer">
-      <p>El mundo puede intentar definirnos por nuestras circunstancias, nuestros errores o las opiniones de los demás.</p>
-      <p>Pero la Palabra de Dios nos invita a comprender nuestra identidad a través de nuestra relación con Jesucristo.</p>
+    <div class="intro-dividida">
+      <header class="momento__cabecera momento__cabecera--lado aparecer">
+        <span class="momento__numero">03</span>
+        <span class="etiqueta">Descubre tu identidad en Cristo</span>
+        <h2 id="titulo-identidad">¿Quién soy <em>en Cristo?</em></h2>
+      </header>
+      <div class="identidad__intro aparecer" data-retraso="1">
+        <p>El mundo puede intentar definirnos por nuestras circunstancias, nuestros errores o las opiniones de los demás.</p>
+        <p>Pero la Palabra de Dios nos invita a comprender nuestra identidad a través de nuestra relación con Jesucristo.</p>
+      </div>
     </div>
     <div class="verdades" id="verdades"><!-- data/verses.js · IDENTIDAD --></div>
     <div class="momento__pie"><a class="boton boton--claro" href="#estudio">Continuar hacia el estudio <svg aria-hidden="true"><use href="#i-abajo"/></svg></a></div>
@@ -149,15 +155,18 @@
 <!-- ===================== 04 · ESTUDIO BÍBLICO ===================== -->
 <section class="momento estudio" id="estudio" data-nombre="Estudio bíblico" aria-labelledby="titulo-estudio">
   <div class="contenedor">
-    <header class="momento__cabecera aparecer">
-      <span class="momento__numero">04</span>
-      <span class="etiqueta">Estudio bíblico · 3 lecciones</span>
-      <h2 id="titulo-estudio">Soy hija de Dios y <em>heredera de sus promesas</em></h2>
-      <p>Lee a tu ritmo. No necesitas registrarte ni escribir tus respuestas: solo abrir tu corazón a la Palabra.</p>
-    </header>
-    <figure class="estudio__portada aparecer" style="margin-top:0">
-      <img src="assets/images/biblia-rosa.webp" alt="Biblia abierta con una pluma dorada sobre sus páginas" width="816" height="702" loading="lazy">
-    </figure>
+    <div class="estudio__intro">
+      <header class="momento__cabecera momento__cabecera--lado estudio__cabecera aparecer">
+        <span class="momento__numero">04</span>
+        <span class="etiqueta">Estudio bíblico · 3 lecciones</span>
+        <h2 id="titulo-estudio">Soy hija de Dios y <em>heredera de sus promesas</em></h2>
+        <p>Lee a tu ritmo. No necesitas registrarte ni escribir tus respuestas: solo abrir tu corazón a la Palabra.</p>
+        <a class="boton estudio__acceso" href="#lector">Comenzar el estudio <svg aria-hidden="true"><use href="#i-abajo"/></svg></a>
+      </header>
+      <figure class="estudio__portada aparecer" data-retraso="1">
+        <img src="assets/images/biblia-rosa.webp" alt="Biblia abierta con una pluma dorada sobre sus páginas" width="816" height="702" loading="lazy">
+      </figure>
+    </div>
     <div class="lector papel aparecer" id="lector">
       <nav class="lector__barra" aria-label="Lecciones del estudio">
         <ol class="lector__pasos" id="lector-pasos"></ol>
@@ -174,6 +183,7 @@
 
 <!-- ===================== 05 · EL TESORO DE LAS PROMESAS ===================== -->
 <section class="momento promesas" id="promesas" data-nombre="Un tesoro de la Palabra" aria-labelledby="titulo-promesas">
+  <div class="mariposas" data-mariposas="2" aria-hidden="true"></div>
   <div class="contenedor">
     <header class="momento__cabecera aparecer">
       <span class="momento__numero">05</span>
@@ -204,15 +214,16 @@
 <!-- ===================== 06 · UN MOMENTO CON MI PADRE ===================== -->
 <section class="momento oracion" id="oracion" data-nombre="Un momento con mi Padre" aria-labelledby="titulo-oracion">
   <div class="contenedor">
-    <header class="momento__cabecera aparecer">
-      <span class="momento__numero">06</span>
-      <span class="etiqueta">Un momento con mi Padre</span>
-      <h2 id="titulo-oracion">Acércate a Él <em>con confianza</em></h2>
-    </header>
     <div class="oracion__grid">
-      <figure class="oracion__foto aparecer" style="margin-bottom:0">
+      <figure class="oracion__foto aparecer">
         <img src="assets/images/ventana-biblia.webp" alt="Biblia abierta junto a una ventana con luz cálida, una vela encendida y flores secas" width="980" height="1470" loading="lazy">
       </figure>
+      <div class="oracion__columna">
+      <header class="momento__cabecera momento__cabecera--lado oracion__cabecera aparecer">
+        <span class="momento__numero">06</span>
+        <span class="etiqueta">Un momento con mi Padre</span>
+        <h2 id="titulo-oracion">Acércate a Él <em>con confianza</em></h2>
+      </header>
       <div class="oracion__texto papel aparecer" data-retraso="1">
         <p class="bloque-titulo">Oración</p>
         <div class="oracion__lineas" id="oracion-lineas">
@@ -229,21 +240,25 @@
           <a class="boton" href="#familia" id="amen">Amén, deseo seguir creciendo</a>
         </div>
       </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ===================== 07 · CONOCE NUESTRA FAMILIA ===================== -->
 <section class="momento familia" id="familia" data-nombre="Aquí caminamos juntas" aria-labelledby="titulo-familia">
+  <img class="flor-deco flor-deco--familia" src="assets/images/peonia-1.webp" alt="" aria-hidden="true" loading="lazy">
   <div class="contenedor">
-    <header class="momento__cabecera aparecer">
-      <span class="momento__numero">07</span>
-      <span class="etiqueta">Conoce nuestra familia</span>
-      <h2 id="titulo-familia">Aquí caminamos <em>juntas</em></h2>
-    </header>
-    <div class="familia__mensaje aparecer">
-      <p>Herederas del Reino es un espacio para crecer en el conocimiento de Dios, compartir su Palabra, orar unas por otras y fortalecer nuestra comunión en Cristo.</p>
-      <p>Deseamos que cada mujer encuentre oportunidades para aprender, servir y caminar acompañada en la fe.</p>
+    <div class="intro-dividida">
+      <header class="momento__cabecera momento__cabecera--lado aparecer">
+        <span class="momento__numero">07</span>
+        <span class="etiqueta">Conoce nuestra familia</span>
+        <h2 id="titulo-familia">Aquí caminamos <em>juntas</em></h2>
+      </header>
+      <div class="familia__mensaje aparecer" data-retraso="1">
+        <p>Herederas del Reino es un espacio para crecer en el conocimiento de Dios, compartir su Palabra, orar unas por otras y fortalecer nuestra comunión en Cristo.</p>
+        <p>Deseamos que cada mujer encuentre oportunidades para aprender, servir y caminar acompañada en la fe.</p>
+      </div>
     </div>
     <div class="familia__grid" id="familia-grid">
       <article class="familia__tarjeta papel aparecer">
@@ -253,7 +268,7 @@
         <p>Nuestra visión es levantar una generación de mujeres firmes en Cristo, conscientes de su identidad como hijas y herederas del Reino de Dios.</p>
         <a class="boton boton--claro externo" data-enlace="sitio" href="#" target="_blank" rel="noopener">Conocer el ministerio</a>
       </article>
-      <article class="familia__tarjeta papel aparecer" data-retraso="1">
+      <article class="familia__tarjeta familia__tarjeta--pastora papel aparecer" data-retraso="1">
         <span class="etiqueta">Nuestra pastora</span>
         <img class="pastora__logo" src="assets/images/pastora-ja.webp" alt="Logotipo de la Pastora Jennyfer Amarales: Llamada para transformar" width="640" height="686" loading="lazy">
         <div class="pastora">
@@ -290,7 +305,7 @@
   <div class="mariposas" data-mariposas="2" aria-hidden="true"></div>
   <div class="contenedor final__grid">
     <div class="final__texto aparecer">
-      <img class="final__corona" src="assets/images/hr-insignia.webp" alt="" width="64" height="58" loading="lazy">
+      <img class="final__logo" src="assets/images/logo-oficial.webp" alt="Herederas del Reino" width="516" height="274" loading="lazy">
       <span class="etiqueta">08 · Bienvenida a casa</span>
       <h2 id="titulo-final" style="margin-top:12px">Bienvenida a casa, <em>Heredera.</em></h2>
       <div class="final__mensaje">
@@ -323,7 +338,7 @@
 </main>
 
 <footer class="pie">
-  <img src="assets/images/logo-vino.webp" alt="Herederas del Reino" width="382" height="167" loading="lazy">
+  <img src="assets/images/logo-oficial.webp" alt="Herederas del Reino" width="516" height="274" loading="lazy">
   <p id="aviso-biblia"></p>
   <p>Este portal no recopila datos personales ni usa cookies.</p>
 </footer>

@@ -22,7 +22,7 @@ export function iniciarMariposas() {
     const bichos = Array.from({ length: n }, (_, i) => {
       const el = document.createElement('div');
       el.className = 'mariposa';
-      const tam = 34 + Math.random() * 30;
+      const tam = 38 + Math.random() * 34;   // mismo rango que el sitio principal
       el.style.setProperty('--tam', `${tam}px`);
       el.style.setProperty('--aleteo', `${(0.32 + Math.random() * 0.2).toFixed(2)}s`);
       const img = new Image(); img.src = IMAGENES[i % IMAGENES.length]; img.alt = ''; img.decoding = 'async';

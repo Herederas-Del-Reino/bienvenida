@@ -4,21 +4,41 @@
 
 /* ---------- Botones ---------- */
 .boton {
-  --fondo: linear-gradient(135deg, var(--vino) 0%, var(--vino-suave) 60%, #B98A3E 140%);
+  --fondo: var(--vino);
+  position: relative; overflow: hidden; isolation: isolate;
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  min-height: 50px; padding: 13px 28px; border-radius: 999px; border: 1px solid rgba(212,175,55,.5);
+  min-height: 48px; padding: 12px 26px; border-radius: 999px; border: 1px solid transparent;
   background: var(--fondo); color: #fff; text-decoration: none; cursor: pointer;
-  font: 500 1rem/1.2 var(--f-texto); letter-spacing: .02em;
-  box-shadow: 0 14px 28px -16px rgba(122,51,70,.8);
-  transition: transform var(--t-corta) var(--suave), box-shadow var(--t-corta), background var(--t-corta);
+  font: 500 .98rem/1.2 var(--f-texto); letter-spacing: .02em;
+  box-shadow: 0 10px 24px -12px rgba(122,51,70,.7);
+  transition: transform .35s ease, box-shadow .35s ease, background .35s ease;
 }
-.boton:hover { transform: translateY(-2px); box-shadow: 0 18px 32px -16px rgba(122,51,70,.9); }
+.boton::before {               /* brillo que cruza al pasar el cursor (sitio principal) */
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);
+  transform: translateX(-120%); transition: transform .8s ease;
+}
+.boton:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -14px rgba(122,51,70,.8); }
+.boton:hover::before { transform: translateX(120%); }
+/* Botón protagonista: mismo tratamiento que el botón del Muro de oración */
+.boton--protagonista {
+  --fondo: linear-gradient(135deg, #6E2A3C 0%, #9C4A5E 55%, #C79A3A 130%);
+  min-height: 58px; padding: 15px 32px; font-size: 1.05rem;
+  border: 1px solid rgba(212,175,55,.65); animation: aura 2.8s ease-out infinite;
+}
+.boton--protagonista svg { color: #F3D98B; }
+@keyframes aura {
+  0%   { box-shadow: 0 0 0 0 rgba(212,175,55,.6), 0 14px 28px -12px rgba(122,51,70,.85); }
+  70%  { box-shadow: 0 0 0 14px rgba(212,175,55,0), 0 14px 28px -12px rgba(122,51,70,.85); }
+  100% { box-shadow: 0 0 0 0 rgba(212,175,55,0), 0 14px 28px -12px rgba(122,51,70,.85); }
+}
 .boton:active { transform: translateY(0); }
 .boton svg { width: 18px; height: 18px; flex: none; }
-.boton--claro { --fondo: rgba(255,251,247,.9); color: var(--vino); border-color: rgba(122,51,70,.22); box-shadow: none; }
+.boton--claro { --fondo: var(--blanco-vidrio); color: var(--vino); border-color: rgba(122,51,70,.25); backdrop-filter: blur(8px); box-shadow: none; }
 .boton--claro:hover { --fondo: #fff; box-shadow: var(--sombra-suave); }
 .boton--texto { --fondo: transparent; color: var(--vino); border-color: transparent; box-shadow: none; padding-inline: 14px; }
 .boton--texto:hover { background: rgba(244,214,222,.45); box-shadow: none; }
+.boton--texto::before { display: none; }
 .boton[disabled] { opacity: .45; cursor: not-allowed; transform: none; }
 .botones { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
 .externo::after { content: " ↗"; font-size: .85em; }
@@ -35,29 +55,39 @@
   background-color: var(--papel);
   background-image:
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .42  0 0 0 0 .29  0 0 0 0 .24  0 0 0 .06 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>"),
-    linear-gradient(170deg, #FFFCF9, var(--marfil));
-  border: 1px solid rgba(231,220,198,.95);
+    linear-gradient(160deg, rgba(255,255,255,.9), rgba(255,246,239,.8));
+  border: 1px solid rgba(255,255,255,.95);
   border-radius: var(--radio);
-  box-shadow: var(--sombra);
+  box-shadow: var(--sombra), inset 0 1px 0 #fff;
 }
 
 /* =====================================================================
    01 · LA PUERTA DE BIENVENIDA
    ===================================================================== */
 .puerta {
-  min-height: 100svh; padding: calc(var(--barra) + 12px) 0 56px;
+  min-height: 100svh; padding: calc(var(--barra-alta) + 8px) 0 44px;
   display: grid; align-items: center; overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(255,246,239,.55), rgba(255,246,239,.92) 70%, var(--marfil)),
-    url("../assets/images/fondo-jardin.webp") center / cover;
+    linear-gradient(180deg, rgba(255,246,239,.2) 0%, rgba(255,246,239,.35) 30%, rgba(255,246,239,.84) 46%, rgba(255,246,239,.88) 85%, var(--rosa-claro) 100%),
+    url("../assets/images/fondo-rosas.webp") 72% center / cover;
+  background-color: #F6DCD8;
 }
-.puerta__grid { display: grid; gap: 28px; justify-items: center; text-align: center; position: relative; z-index: 2; }
-.puerta__logo { width: min(210px, 52vw); }
-.puerta__marco {
-  position: relative; width: min(78vw, 360px); aspect-ratio: 4 / 5;
-  border-radius: 999px 999px 24px 24px / 50% 50% 24px 24px; overflow: hidden;
-  box-shadow: 0 0 0 1px var(--linea-dorada), 0 0 0 8px rgba(255,251,247,.7), 0 30px 60px -30px rgba(74,51,43,.55);
+.puerta::after {          /* luz cálida que respira, como en la portada del sitio principal */
+  content: ""; position: absolute; z-index: 0; width: 70vmax; height: 70vmax; left: 30%; top: 45%; pointer-events: none;
+  transform: translate(-50%, -50%); background: radial-gradient(circle, rgba(243,199,181,.35), transparent 60%);
+  animation: respirar 10s ease-in-out infinite;
 }
+@keyframes respirar { 50% { transform: translate(-50%, -50%) scale(1.1); opacity: .75; } }
+.puerta__grid { display: grid; gap: clamp(20px, 3vw, 28px); justify-items: center; text-align: center; position: relative; z-index: 2; }
+.puerta__marco { position: relative; margin: 0; width: min(70vw, 340px); aspect-ratio: 4 / 5; }
+.puerta__ventana {
+  position: absolute; inset: 0; overflow: hidden;
+  border-radius: 50% 50% 24px 24px / 38% 38% 24px 24px;
+  box-shadow: 0 0 0 1px var(--linea-dorada), 0 0 0 8px rgba(255,251,247,.75), 0 0 0 9px rgba(212,175,55,.35), 0 30px 60px -26px rgba(122,51,70,.55);
+}
+.puerta__flor { position: absolute; z-index: 2; pointer-events: none; filter: drop-shadow(0 10px 12px rgba(122,51,70,.22)); }
+.puerta__flor--izq { width: 34%; left: -14%; bottom: -8%; transform: rotate(-10deg); }
+.puerta__flor--der { width: 22%; right: -9%; bottom: 10%; transform: rotate(14deg); }
 .puerta__img { width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 46%; }
 .puerta__luz {          /* luz cálida que aparece progresivamente desde la puerta */
   position: absolute; inset: 0; pointer-events: none;
@@ -65,9 +95,9 @@
   mix-blend-mode: screen; opacity: 0;
 }
 .puerta__velo { position: fixed; inset: 0; z-index: 150; pointer-events: none; background: radial-gradient(circle at 50% 45%, #FFFDF8, #FFF6EF 70%); opacity: 0; }
-.puerta__texto h1 { font: 500 clamp(2.4rem, 9vw, 4.2rem)/1.05 var(--f-titulo); color: var(--vino); }
-.puerta__texto h1 em { color: var(--vino-suave); }
-.puerta__subtitulo { margin-top: 12px; font: italic 500 clamp(1.3rem, 4.4vw, 1.7rem)/1.3 var(--f-editorial); color: var(--marron); }
+.puerta__texto h1 { font: 600 clamp(2.5rem, 8.6vw, 4.6rem)/1.04 var(--f-titulo); color: var(--vino); text-wrap: balance; }
+.puerta__texto h1 em { font-weight: 600; color: var(--vino-suave); }
+.puerta__subtitulo { margin-top: 12px; font: italic 500 clamp(1.6rem, 4.6vw, 2.2rem)/1.2 var(--f-titulo); color: var(--vino-suave); }
 .puerta__cuerpo { margin: 18px auto 0; max-width: 520px; color: var(--marron-oscuro); }
 .puerta__cuerpo p + p { margin-top: 10px; }
 .puerta__versiculo { margin: 22px auto 26px; max-width: 480px; }
@@ -76,9 +106,19 @@
 /* =====================================================================
    02 · CARTA
    ===================================================================== */
-.carta-seccion { background: linear-gradient(180deg, var(--marfil), #FBEDEA); }
+.carta-seccion {
+  background:
+    radial-gradient(ellipse 50% 45% at 85% 15%, rgba(243,199,181,.4), transparent 70%),
+    radial-gradient(ellipse 45% 45% at 10% 85%, rgba(232,180,194,.4), transparent 70%),
+    linear-gradient(180deg, var(--rosa-claro), #F9E1E4);
+}
+.flor-deco { position: absolute; pointer-events: none; z-index: 0; filter: drop-shadow(0 10px 14px rgba(122,51,70,.2)); }
+.flor-deco--carta { width: clamp(70px, 9vw, 110px); left: max(-20px, calc(50% - 250px)); bottom: -10px; transform: rotate(-12deg); transition: opacity .4s; }
+.carta-seccion.abierta .flor-deco--carta { opacity: 0; }
+.flor-deco--familia { width: clamp(100px, 12vw, 160px); right: max(-20px, calc(50% - 700px)); top: 18px; transform: rotate(18deg); }
+.sobre { z-index: 1; }
 .sobre {
-  position: relative; display: block; margin: 0 auto; width: min(100%, 380px); padding: 0; border: 0; cursor: pointer;
+  position: relative; display: block; margin: 0 auto; width: min(100%, 340px); padding: 0; border: 0; cursor: pointer;
   background: none; border-radius: 22px; transition: transform var(--t-media) var(--suave), opacity var(--t-media) var(--suave);
 }
 .sobre img { border-radius: 22px; box-shadow: var(--sombra); }
@@ -115,10 +155,10 @@
 /* =====================================================================
    03 · IDENTIDAD
    ===================================================================== */
-.identidad { background: linear-gradient(180deg, #FBEDEA, var(--marfil)); }
+.identidad { background: linear-gradient(180deg, #F9E1E4, var(--marfil) 55%, var(--rosa-claro)); }
 .identidad__intro { max-width: 600px; margin: 0 auto; text-align: center; color: var(--marron); }
 .identidad__intro p + p { margin-top: 8px; }
-.verdades { display: grid; gap: 18px; margin-top: 36px; }
+.verdades { display: grid; gap: var(--esp-bloque); }
 .verdad { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
 .verdad__cabecera { display: grid; grid-template-columns: 92px 1fr; gap: 16px; align-items: center; padding: 22px 22px 18px; }
 .verdad__flor { width: 92px; height: 110px; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 8px 10px rgba(107,75,62,.2)); }
@@ -141,9 +181,16 @@
 /* =====================================================================
    04 · ESTUDIO BÍBLICO
    ===================================================================== */
-.estudio { background: linear-gradient(180deg, var(--marfil), #F9EEE9); }
-.estudio__portada { position: relative; width: min(100%, 520px); margin: 0 auto 28px; border-radius: var(--radio-l); overflow: hidden; box-shadow: var(--sombra); aspect-ratio: 816 / 470; }
-.estudio__portada img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+.estudio {
+  background:
+    radial-gradient(ellipse 45% 40% at 90% 12%, rgba(232,180,194,.35), transparent 70%),
+    linear-gradient(180deg, var(--rosa-claro), #FBE7E6);
+}
+.estudio__intro { display: grid; gap: var(--esp-bloque); margin-bottom: var(--esp-contenido); }
+.estudio__cabecera { margin: 0 auto; }
+.estudio__acceso { margin-top: var(--esp-bloque); }
+.estudio__portada { position: relative; width: min(100%, 520px); margin: 0 auto; border-radius: var(--radio-l); overflow: hidden; box-shadow: var(--sombra); aspect-ratio: 4 / 3; }
+.estudio__portada img { width: 100%; height: 100%; object-fit: cover; object-position: center 45%; }
 .lector { width: min(100%, 760px); margin: 0 auto; padding: 0; overflow: hidden; }
 .lector__barra { padding: 18px 20px 0; }
 .lector__pasos { display: flex; gap: 6px; list-style: none; margin: 0; padding: 0; }
@@ -169,7 +216,7 @@
 .leccion__oracion { padding: 20px 22px; border-radius: 14px; border: 1px solid var(--linea-dorada); font: italic 500 1.2rem/1.6 var(--f-editorial); text-align: center; color: var(--vino); }
 .lector__navegacion { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 18px 20px 22px; border-top: 1px solid var(--linea); }
 .lector__contador { font: 500 .8rem/1 var(--f-texto); color: var(--marron-suave); }
-.lector__final { text-align: center; padding: 48px 24px 56px; }
+.lector__final { text-align: center; padding: 36px 24px 40px; }
 .lector__final h3 { font: italic 500 clamp(1.8rem, 6vw, 2.4rem)/1.2 var(--f-titulo); color: var(--vino); }
 .lector__final p { margin: 12px auto 24px; max-width: 420px; color: var(--marron); }
 .lector__final img { width: 64px; margin: 0 auto 14px; }
@@ -179,25 +226,25 @@
    ===================================================================== */
 .promesas {
   background:
-    linear-gradient(180deg, rgba(249,238,233,.94), rgba(255,246,239,.96)),
+    linear-gradient(180deg, rgba(251,231,230,.86), rgba(244,214,222,.82)),
     url("../assets/images/luz-mariposas.webp") center / cover;
 }
 .cofre { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
 .promesa-sobre {
   position: relative; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; text-align: left;
-  min-height: 150px; padding: 20px 20px 18px; cursor: pointer; border-radius: 16px; overflow: hidden;
+  min-height: 180px; padding: 20px 20px 18px; cursor: pointer; border-radius: 16px; overflow: hidden;
   border: 1px solid rgba(212,175,55,.35);
   background: linear-gradient(160deg, #FFFBF7, #F8E6E5); box-shadow: var(--sombra-suave);
   transition: transform var(--t-media) var(--suave), box-shadow var(--t-media);
 }
 .promesa-sobre::before {      /* solapa del sobre */
-  content: ""; position: absolute; inset: 0 0 auto 0; height: 58%;
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 46%;
   background: linear-gradient(180deg, rgba(244,214,222,.75), rgba(244,214,222,.25));
   clip-path: polygon(0 0, 100% 0, 50% 100%); transition: transform var(--t-media) var(--suave);
   transform-origin: 50% 0;
 }
 .promesa-sobre::after {       /* sello dorado */
-  content: ""; position: absolute; top: 46%; left: 50%; width: 22px; height: 22px; border-radius: 50%; transform: translate(-50%, -50%);
+  content: ""; position: absolute; top: 36%; left: 50%; width: 22px; height: 22px; border-radius: 50%; transform: translate(-50%, -50%);
   background: radial-gradient(circle at 35% 30%, #E8CF7A, #C9A23A 60%, #9E7E1E); box-shadow: 0 3px 8px -3px rgba(74,51,43,.6);
 }
 .promesa-sobre:hover { transform: translateY(-4px); box-shadow: var(--sombra); }
@@ -218,35 +265,49 @@
 /* =====================================================================
    06 · ORACIÓN
    ===================================================================== */
-.oracion { background: linear-gradient(180deg, var(--marfil), #F7ECE4); }
-.oracion__grid { display: grid; gap: 28px; align-items: center; }
-.oracion__foto { width: min(100%, 420px); margin: 0 auto; border-radius: 200px 200px var(--radio-l) var(--radio-l); overflow: hidden; box-shadow: var(--sombra); aspect-ratio: 980 / 1180; }
+.oracion {
+  background:
+    radial-gradient(ellipse 45% 50% at 15% 55%, rgba(243,199,181,.45), transparent 70%),
+    linear-gradient(180deg, var(--rosa-claro), var(--marfil));
+}
+.oracion__grid { display: grid; gap: var(--esp-bloque); align-items: center; }
+.oracion__columna { display: contents; }
+.oracion__cabecera { order: -1; margin-bottom: 0; }
+.oracion__foto { width: min(100%, 320px); margin: 0 auto; border-radius: 200px 200px var(--radio-l) var(--radio-l); overflow: hidden; box-shadow: var(--sombra); aspect-ratio: 980 / 1180; }
 .oracion__foto img { width: 100%; height: 100%; object-fit: cover; object-position: center 70%; }
 .oracion__texto { padding: clamp(24px, 5vw, 44px); }
-.oracion__lineas { margin-top: 18px; display: grid; gap: 12px; }
+.oracion__lineas { margin-top: 14px; display: grid; gap: 10px; }
 .oracion__lineas p { font: 500 1.28rem/1.6 var(--f-editorial); color: var(--marron-oscuro); transition: color .9s ease, opacity .9s ease; }
 .oracion.guiando .oracion__lineas p { opacity: .38; }
 .oracion.guiando .oracion__lineas p.actual { opacity: 1; color: var(--vino); }
 .oracion.guiando .oracion__lineas p.leida { opacity: .8; }
 .oracion__lineas .amen { font-style: italic; color: var(--vino); }
-.oracion__controles { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.oracion__controles { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
 .oracion__audio audio { width: 100%; margin-top: 16px; }
 
 /* =====================================================================
    07 · FAMILIA
    ===================================================================== */
-.familia { background: linear-gradient(180deg, #F7ECE4, var(--marfil)); }
+.familia {
+  background:
+    radial-gradient(ellipse 50% 40% at 85% 10%, rgba(243,199,181,.45), transparent 70%),
+    radial-gradient(ellipse 45% 40% at 10% 90%, rgba(232,180,194,.4), transparent 70%),
+    linear-gradient(180deg, var(--marfil), var(--rosa-empolvado));
+}
+.familia .contenedor { position: relative; z-index: 1; }
 .familia__mensaje { max-width: 640px; margin: 0 auto; text-align: center; font: 500 1.25rem/1.6 var(--f-editorial); color: var(--marron-oscuro); }
 .familia__mensaje p + p { margin-top: 10px; }
-.familia__grid { display: grid; gap: 18px; margin-top: 36px; }
-.familia__tarjeta { padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+.familia__grid { display: grid; gap: var(--esp-bloque); }
+.familia__tarjeta { padding: clamp(20px, 2.4vw, 28px); display: flex; flex-direction: column; gap: 12px; }
 .familia__tarjeta h3 { font-size: 1.6rem; }
 .familia__tarjeta p { color: var(--marron); }
 .familia__tarjeta .boton { align-self: flex-start; margin-top: auto; }
 .familia__foto { border-radius: 14px; aspect-ratio: 899 / 560; object-fit: cover; object-position: center 25%; width: 100%; }
 .pastora { display: flex; align-items: center; gap: 14px; }
 .pastora img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 3px solid #fff; box-shadow: 0 0 0 1px var(--dorado); }
-.pastora__logo { width: 120px; align-self: center; }
+.pastora__logo { width: clamp(120px, 15vw, 180px); align-self: center; }
+.familia__tarjeta--pastora { justify-content: center; align-items: center; text-align: center; }
+.familia__tarjeta--pastora .boton { align-self: center; margin-top: 6px; }
 .pastora__pendiente { font-style: italic; font-size: .92rem; color: var(--marron-suave); }
 .encuentros-lista { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
 .encuentros-lista li { padding: 10px 0; border-bottom: 1px solid var(--linea); }
@@ -262,29 +323,31 @@
 .final {
   overflow: hidden;
   background:
-    radial-gradient(ellipse at 50% 0%, rgba(255,253,249,.9), rgba(255,246,239,.88) 55%, rgba(248,232,230,.92)),
-    url("../assets/images/biblia-manta.webp") center / cover;
+    linear-gradient(180deg, rgba(244,214,222,.5), rgba(255,246,239,.4) 40%, rgba(252,239,234,.85)),
+    radial-gradient(ellipse 60% 70% at 28% 50%, rgba(255,250,246,.85), transparent 75%),
+    url("../assets/images/arco-floral.webp") center 40% / cover;
+  background-color: #F6E3E2;
 }
-.final__grid { display: grid; gap: 32px; align-items: center; }
+.final__grid { display: grid; gap: var(--esp-contenido); align-items: center; }
 .final__texto { text-align: center; }
-.final__corona { width: 64px; margin: 0 auto 16px; border-radius: 12px; }
-.final__texto h2 { font: 500 clamp(2.3rem, 8vw, 3.6rem)/1.08 var(--f-titulo); color: var(--vino); }
+.final__logo { width: clamp(170px, 22vw, 230px); margin: 0 auto 14px; }
+.final__texto h2 { font: 600 clamp(2.3rem, 7vw, 3.6rem)/1.08 var(--f-titulo); color: var(--vino); }
 .final__texto h2 em { color: var(--vino-suave); }
 .final__mensaje { margin: 18px auto 0; max-width: 520px; font: 500 1.22rem/1.65 var(--f-editorial); color: var(--marron-oscuro); }
 .final__mensaje p + p { margin-top: 10px; }
-.final__versiculo { margin: 24px auto 0; max-width: 540px; }
+.final__versiculo { margin: 20px auto 0; max-width: 540px; }
 .tarjeta-vista { width: min(100%, 360px); margin: 0 auto; position: relative; }
 .tarjeta-vista #tarjeta-imagen { width: 100%; border-radius: 14px; box-shadow: 0 30px 60px -30px rgba(74,51,43,.6); }
 .tarjeta-vista #tarjeta-imagen { aspect-ratio: 1080 / 1350; background: linear-gradient(170deg, #FFFDF9, var(--marfil)); }
 .tarjeta-vista #tarjeta-imagen:not([src]) { color: transparent; }
 .tarjeta-vista .tarjeta-vista__mariposa { position: absolute; width: 64px; top: -22px; right: -14px; animation: flotar 7s ease-in-out infinite; }
-.final__acciones { display: grid; gap: 10px; margin-top: 22px; }
+.final__acciones { display: grid; gap: 10px; margin-top: 18px; }
 .final__acciones .botones { justify-content: center; }
 .final__estado { min-height: 1.4em; text-align: center; font-size: .88rem; color: var(--vino); }
 
 /* ---------- Pie ---------- */
-.pie { padding: 36px 0 44px; text-align: center; border-top: 1px solid var(--linea); background: var(--marfil); }
-.pie img { width: 150px; margin: 0 auto 12px; }
+.pie { padding: 36px 0 44px; text-align: center; border-top: 1px solid var(--linea); background: linear-gradient(180deg, var(--rosa-claro), var(--rosa-empolvado)); }
+.pie img { width: 170px; margin: 0 auto 12px; }
 .pie p { font-size: .8rem; color: var(--marron-suave); }
 .pie p + p { margin-top: 6px; }
 .pie a { color: var(--marron); }
